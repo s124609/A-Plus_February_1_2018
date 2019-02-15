@@ -1,0 +1,96 @@
+import java.io.File;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class checkpoint {
+    private static char[][] maze;
+    private static char[][] checkpoint;
+    private int[][] shadow;
+    private static Scanner file;
+    private static int numCheck;
+
+    private checkpoint() {
+        int times = file.nextInt();file.nextLine();
+        for(int num = 1; num <= times; num++) {
+            int r = file.nextInt();
+            int c = file.nextInt();
+            numCheck = file.nextInt();
+
+            maze = new char[r][c];
+            shadow = new int[r][c];
+            int[] locs = new int[4];
+            file.nextLine();
+
+            for(int i = 0; i < r; i++) {
+                maze[i] = file.nextLine().toCharArray();
+            }
+
+            for (int i = 1; i <= numCheck+1; i++) {
+                checkpoint = maze;
+                Arrays.fill(shadow[i],1<<16);
+                for(int g = 0; g < maze.length; g++){
+                    for(int l = 0; l < maze[g].length; l++) {
+                        if (i == 1) {
+                            if (checkpoint[g][l] == 'S') {
+                                locs[0] = g;
+                                locs[1] = l;
+                            }
+                            else if (checkpoint[g][l] == i) {
+                                locs[2] = g;
+                                locs[3] = l;
+                            }
+                        }
+                        else if (i == numCheck+1) {
+                            if (checkpoint[g][l] == i) {
+                                locs[0] = g;
+                                locs[1] = l;
+                            }
+                            else if (checkpoint[g][l] == 'E') {
+                                locs[2] = g;
+                                locs[3] = l;
+                            }
+                        }
+                        else {
+                            if (checkpoint[g][l] == i) {
+                                locs[0] = g;
+                                locs[1] = l;
+                            }
+                            else if (checkpoint[g][l] == i+1) {
+                                locs[2] = g;
+                                locs[3] = l;
+                            }
+                        }
+                    }
+                }
+                permu(locs[0], locs[1],0);
+
+                System.out.println(locs[0] + "," + locs[1] + " :: " + locs[2] + "," + locs[3]);
+                System.out.println((shadow[locs[2]][locs[3]] != (1 << 16)) ? shadow[locs[2]][locs[3]] : "NOT POSSIBLE");
+
+                for (char[] chars : checkpoint) {
+                    for (char aChar : chars)
+                        System.out.print(aChar);
+                    System.out.println();
+                }
+            }
+        }
+    }
+
+    private void permu(int r, int c, int length) {
+        if((r >= 0) && (c >= 0) && (r < checkpoint.length) && (c < checkpoint[r].length) && (checkpoint[r][c] != '#')
+                && (length < shadow[r][c])) {
+            shadow[r][c] = length;
+            permu(r+2,c,length+1);
+            permu(r-2,c,length+1);
+            permu(r,c+2,length+1);
+            permu(r,c-2,length+1);
+            permu(r,c+1,length+1);
+            permu(r-1,c,length+1);
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        file  = new Scanner(new File(("checkpoint.dat")));
+        new checkpoint();
+    }
+}
