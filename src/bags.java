@@ -15,8 +15,10 @@ public class bags {
         do {
             length = file.nextInt();
             array = new int[length];
+
             for (int i = length-1; i >= 0; i--)
                 array[i] = file.nextInt();
+
             goal = file.nextInt();
 
             permu(0, 0, 0);
