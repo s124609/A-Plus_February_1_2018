@@ -9,12 +9,10 @@ public class ornaments {
         Scanner file = new Scanner(new File("ornaments.dat"));
         file.nextInt();
         do {
-            int layers = file.nextInt();
-            int total = 0;
+            long num = file.nextInt();
+            long total;
 
-            for (int i = layers; i > 0; i--)
-                total += (i * (i + 1)) / 2;
-
+            total = (num * (num + 1) * (num+2)) / 6;
             out.println(total);
         }while(file.hasNextInt());
 
