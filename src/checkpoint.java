@@ -65,9 +65,6 @@ public class checkpoint {
                 }
                 permu(locs[0], locs[1],0);
 
-                //System.out.println(locs[0] + "," + locs[1] + " :: " + locs[2] + "," + locs[3]);
-                System.out.print((shadow[locs[2]][locs[3]] != (1 << 16)) ? "" : "NOT POSSIBLE\n");
-
                 total += shadow[locs[2]][locs[3]];
             }
 

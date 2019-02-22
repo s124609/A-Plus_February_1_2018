@@ -7,7 +7,7 @@ import static java.lang.System.*;
 public class quadratics {
     public static void main(String[] args) throws IOException {
         Scanner file = new Scanner(new File("quadratics.dat"));
-        file.nextLine();
+        int size = file.nextInt();
 
         do {
             double a = file.nextDouble();
@@ -21,6 +21,8 @@ public class quadratics {
             out.print(", ");
             out.printf("%.3f", solutionM);
             out.println();
-        }while(file.hasNextLine());
+
+            size--;
+        }while(size > 0);
     }
 }

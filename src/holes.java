@@ -26,11 +26,11 @@ public class holes {
 
             traverse();
 
-            out.println(sections + " sections, " + spaces + " spaces");
+            out.print(sections == 1 ? (sections + " section, ") : (sections + " sections, "));
+            out.println(spaces == 1 ? (spaces + " space") : (spaces + " spaces"));
 
             size--;
         }while(size > 0);
-
     }
 
     private static void traverse()
