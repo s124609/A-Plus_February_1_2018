@@ -31,7 +31,17 @@ public class checkpoint {
 
                 for(int g = 0; g < maze.length; g++){
                     for(int l = 0; l < maze[g].length; l++) {
-                        if (curCheck == 1) {
+                        if (numCheck == 0) {
+                            if (checkpoint[g][l].equals("S")) {
+                                locs[0] = g;
+                                locs[1] = l;
+                            }
+                            else if (checkpoint[g][l].equals("E")) {
+                                locs[2] = g;
+                                locs[3] = l;
+                            }
+                        }
+                        else if (curCheck == 1) {
                             if (checkpoint[g][l].equals("S")) {
                                 locs[0] = g;
                                 locs[1] = l;
